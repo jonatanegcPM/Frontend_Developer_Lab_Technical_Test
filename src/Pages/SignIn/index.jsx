@@ -1,9 +1,10 @@
-import { useContext, useState, useRef } from 'react'
-import { Link, Navigate } from 'react-router-dom'
-import { ShoppingCartContext } from '../../Context'
+import { useContext, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Layout from '../../Components/Layout'
+import { ShoppingCartContext } from '../../Context'
 
 function SignIn() {
+  const navigate = useNavigate()
   const context = useContext(ShoppingCartContext)
   const [view, setView] = useState('user-info')
   const form = useRef(null)
@@ -20,24 +21,23 @@ function SignIn() {
     const stringifiedSignOut = JSON.stringify(false)
     localStorage.setItem('sign-out', stringifiedSignOut)
     context.setSignOut(false)
-    // Redirect
-    return <Navigate replace to={'/'} />
+    navigate('/')
   }
 
   const createAnAccount = () => {
-		const formData = new FormData(form.current)
-		const data = {
-			name: formData.get('name'),
-			email: formData.get('email'),
-			password: formData.get('password')
-		}
+    const formData = new FormData(form.current)
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      password: formData.get('password')
+    }
     // Create account
     const stringifiedAccount = JSON.stringify(data)
     localStorage.setItem('account', stringifiedAccount)
     context.setAccount(data)
     // Sign In
     handleSignIn()
-	}
+  }
 
   const renderLogIn = () => {
     return (
@@ -53,7 +53,7 @@ function SignIn() {
         <Link
           to="/">
           <button
-            className='bg-black disabled:bg-black/40 text-white  w-full rounded-lg py-3 mt-4 mb-2'
+            className='bg-black disabled:bg-black/40 text-white w-full rounded-lg py-3 mt-4 mb-2'
             onClick={() => handleSignIn()}
             disabled={!hasUserAnAccount}>
             Log in
@@ -83,8 +83,7 @@ function SignIn() {
             name="name"
             defaultValue={parsedAccount?.name}
             placeholder="Peter"
-            className='rounded-lg border border-black placeholder:font-light
-            placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4'
+            className='rounded-lg border border-black placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4'
           />
         </div>
         <div className='flex flex-col gap-1'>
@@ -95,8 +94,7 @@ function SignIn() {
             name="email"
             defaultValue={parsedAccount?.email}
             placeholder="hi@helloworld.com"
-            className='rounded-lg border border-black
-            placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4'
+            className='rounded-lg border border-black placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4'
           />
         </div>
         <div className='flex flex-col gap-1'>
@@ -107,8 +105,7 @@ function SignIn() {
             name="password"
             defaultValue={parsedAccount?.password}
             placeholder="******"
-            className='rounded-lg border border-black
-            placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4'
+            className='rounded-lg border border-black placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4'
           />
         </div>
         <Link to="/">

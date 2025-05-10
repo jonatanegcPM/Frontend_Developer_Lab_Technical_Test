@@ -1,8 +1,8 @@
+import { XMarkIcon } from '@heroicons/react/24/solid'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { XMarkIcon } from '@heroicons/react/24/solid'
-import { ShoppingCartContext } from '../../Context'
 import OrderCard from '../../Components/OrderCard'
+import { ShoppingCartContext } from '../../Context'
 import { totalPrice } from '../../utils'
 import './styles.css'
 

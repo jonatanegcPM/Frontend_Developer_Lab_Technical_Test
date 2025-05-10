@@ -1,23 +1,30 @@
-import { useContext } from 'react'
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
+import { useContext } from 'react'
 import { ShoppingCartContext } from '../../Context'
 
-const ShoppingCart = () => {
+const ShoppingCart = ({ mobileView }) => {
   const context = useContext(ShoppingCartContext)
 
   const openCheckoutSideMenu = () => {
     context.openCheckout()
     context.closeProductDetail()
+    if (mobileView) mobileView()
   }
 
   return (
-    <div className='relative flex gap-0.5 items-center' onClick={() => openCheckoutSideMenu()}>
-      <ShoppingBagIcon className='w-6 h-6 fill-none stroke-black cursor-pointer'/>
-      <div className='absolute bottom-3.5 left-3.5 flex justify-center items-center
-      rounded-full bg-black w-4 h-4 text-xs text-white'>
+    <button 
+      onClick={() => openCheckoutSideMenu()}
+      className="group -m-2 p-2 flex items-center hover:bg-gray-50 rounded-full transition-colors"
+    >
+      <ShoppingBagIcon
+        className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-indigo-600 transition-colors"
+        aria-hidden="true"
+      />
+      <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-indigo-600 transition-colors">
         {context.cartProducts.length}
-      </div>
-    </div>
+      </span>
+      <span className="sr-only">items in cart, view bag</span>
+    </button>
   )
 }
 

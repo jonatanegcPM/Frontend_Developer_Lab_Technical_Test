@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Loading spinner animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Layout adjustments */
+body {
+  @apply bg-gray-50;
+}
+
+/* Ensure content is below fixed navbar */
+main {
+  @apply pt-16;
+}

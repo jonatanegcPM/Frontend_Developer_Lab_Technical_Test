@@ -1,6 +1,6 @@
-import { useContext, useState, useRef } from 'react'
-import { ShoppingCartContext } from '../../Context'
+import { useContext, useRef, useState } from 'react'
 import Layout from '../../Components/Layout'
+import { ShoppingCartContext } from '../../Context'
 
 function MyAccount() {
   const context = useContext(ShoppingCartContext)
